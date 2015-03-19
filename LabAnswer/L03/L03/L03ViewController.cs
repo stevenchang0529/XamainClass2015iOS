@@ -1,0 +1,83 @@
+﻿using System;
+using System.Drawing;
+
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+
+namespace L03
+{
+    public partial class L03ViewController : UIViewController
+    {
+        public L03ViewController(IntPtr handle)
+            : base(handle)
+        {
+            //lab:在畫面上加入NavigationController並設定rootView
+
+            //lab:使用拖曳方式按下One讓Root轉換至One
+            
+          
+        }
+
+        //lab覆寫PrepareForSegue，判斷是要去One或Two，並給予參數值segue.Identifier
+
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
+            if (segue.Identifier == "GoOne")
+            {
+                var controller=segue.DestinationViewController as OneViewController;
+                controller.Value = segue.Identifier;
+            }
+            else if (segue.Identifier == "GoTwo")
+            {
+                var controller = segue.DestinationViewController as TwoViewController;
+                controller.Value = segue.Identifier;
+            }
+
+        }
+
+        public override void DidReceiveMemoryWarning()
+        {
+            // Releases the view if it doesn't have a superview.
+            base.DidReceiveMemoryWarning();
+
+            // Release any cached data, images, etc that aren't in use.
+        }
+
+        #region View lifecycle
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            this.Title = "Orz";
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+        }
+
+        #endregion
+
+        partial void UIButton249_TouchUpInside(UIButton sender)
+        {
+            //lab:使用程式碼的方式按下Two By Code讓Root轉換至Two
+            var controller = this.Storyboard.InstantiateViewController("Test") as TwoViewController;
+            this.NavigationController.PushViewController(controller, true);
+        }
+    }
+}
